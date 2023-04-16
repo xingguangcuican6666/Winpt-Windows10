@@ -1,0 +1,9 @@
+[Fri Apr 14 09:21:46.946933 2023] [mpm_winnt:notice] [pid 5260:tid 116] AH00455: Apache/2.4.55 (Win32) OpenSSL/1.1.1s configured -- resuming normal operations
+[Fri Apr 14 09:21:46.971934 2023] [mpm_winnt:notice] [pid 5260:tid 116] AH00456: Server built: Jan 15 2023 10:14:48
+[Fri Apr 14 09:21:46.974934 2023] [core:notice] [pid 5260:tid 116] AH00094: Command line: 'H:\\Apache24\\bin\\httpd.exe -d H:/Apache24'
+[Fri Apr 14 09:21:46.997936 2023] [mpm_winnt:notice] [pid 5260:tid 116] AH00418: Parent: Created child process 2204
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 2204:tid 124] AH00354: Child: Starting 64 worker threads.
+[Fri Apr 14 09:27:08.405319 2023] [mpm_winnt:notice] [pid 5260:tid 116] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Apr 14 09:27:10.415434 2023] [mpm_winnt:notice] [pid 2204:tid 124] AH00364: Child: All worker threads have exited.
+[Fri Apr 14 09:27:10.495439 2023] [mpm_winnt:notice] [pid 5260:tid 116] AH00430: Parent: Child process 2204 exited successfully.
