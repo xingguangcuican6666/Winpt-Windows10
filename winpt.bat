@@ -1,5 +1,6 @@
 @echo off
 ::apt for windows
+color e
 set sdb=%cd%
 if /i %PROCESSOR_IDENTIFIER:~0,3%==x86 (
     echo 32位操作系统
@@ -71,21 +72,21 @@ if "%ins%" == "%2" (
 for /f "delims=" %%i in ('powershell cat .\mirrorlist.json ^| python -c "import sys, json; print(json.load(sys.stdin)['Server'])"') do set Server=%%i
 echo 获取1:%Server%package.json
 curl %Server%package.json > .\mirror\package.json > nul
-for /f "delims=" %%i in ('powershell cat package.json ^| python -c "import sys, json; print(json.load(sys.stdin)['repow'])"') do set repow=%%i
-mkdir .\mirror\w\
+for /f "delims=" %%i in ('powershell cat .\mirror\package.json ^| python -c "import sys, json; print(json.load(sys.stdin)['repow'])"') do set repow=%%i
+mkdir .\mirror\w\ > nul
 echo 获取2:%Server%%repow%
 curl %Server%%repow% > .\mirror\w\list.json > nul
-for /f "delims=" %%i in ('powershell cat package.json ^| python -c "import sys, json; print(json.load(sys.stdin)['iso'])"') do set iso=%%i
-mkdir .\mirror\iso\
+for /f "delims=" %%i in ('powershell cat .\mirror\package.json ^| python -c "import sys, json; print(json.load(sys.stdin)['iso'])"') do set iso=%%i
+mkdir .\mirror\iso\ > nul
 echo 获取3:%Server%%iso%
-curl %Server%%iso% > .\mirror\iso\list.json > nul
-for /f "delims=" %%i in ('powershell cat .\iso\list.json ^| python -c "import sys, json; print(json.load(sys.stdin)['arch'])"') do set arch=%%i
-mkdir .\mirror\iso\arch
-echo 获取4:%Server%/repo/iso/%arch%
-curl %Server%/repo/iso/%arch% > .\mirror\iso\arch\version.json > nul
+curl %Server%%iso%/list.json > .\mirror\iso\list.json > nul
+for /f "delims=" %%i in ('powershell cat .\mirror\iso\list.json ^| python -c "import sys, json; print(json.load(sys.stdin)['arch'])"') do set arch=%%i
+mkdir .\mirror\iso\arch > nul
+echo 获取4:%Server%/repo/iso%arch%
+curl %Server%/repo/iso%arch% > .\mirror\iso\arch\version.json > nul
 
 
-if not exist package.json (
+if not exist .\mirror\package.json (
     echo 无法下载%Server%/package.json
     echo 请检查网络连接或mirrorlist.json
     timeout 3
@@ -122,8 +123,9 @@ if "%ins%" == "%2" (
 goto q
 
 :clear
-del /s /q .\mirror
+del /s /q .\mirror 
 del /s /q .\package.json
 goto q
 :q
 cd %sdb%
+color 7
