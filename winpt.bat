@@ -18,7 +18,6 @@ if not exist ok.lock (
     if not exist python-3.11.0.exe (
         echo =================================
         echo 错误，请重新运行
-        echo ERROR 404
         echo =================================
         timeout 5
         goto q
